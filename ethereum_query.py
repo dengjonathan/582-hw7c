@@ -36,7 +36,11 @@ def get_block_cost(block_num):
 # Return the hash of the most expensive transaction
 def get_most_expensive_transaction(block_num):
     transactions = w3.eth.get_block(block_num, full_transactions=False).transactions
-    result = 0
+    maxCost = 0
+    result = None
     for t in transactions:
-        result = max(result, get_transaction_cost(t))
+        cost = get_transaction_cost(t)
+        if cost > maxCost:
+            maxCost = cost
+            result = t
     return result
