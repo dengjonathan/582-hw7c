@@ -13,8 +13,7 @@ w3 = Web3(Web3.HTTPProvider('http://' + IP_ADDR + ':' + PORT))
 #     print( "Failed to connect to Ethereum node!" )
 
 def get_transaction(tx):
-    w3.eth.get_transaction(tx)
-    return tx
+    return w3.eth.get_transaction(tx)
 
 # Return the gas price used by a particular transaction,
 #   tx is the transaction
@@ -22,7 +21,7 @@ def get_gas_price(tx):
     return get_transaction(tx).gasPrice
 
 def get_gas(tx):
-    return w3.eth.get_transaction_receipt(tx)
+    return w3.eth.get_transaction_receipt(tx).gasUsed
 
 def get_transaction_cost(tx):
     return get_gas_price(tx) * get_gas(tx)
